@@ -17,8 +17,12 @@ class Calendar extends Component {
   }
 
   handleChange = ({target: {name, value}}) => {
-
-
+    this.state.events.map((event, index) => {
+      if (index === 0) {
+        event[name] = value
+      }
+      return event
+    })
   }
 
   // handleSubmit = (event) => {
