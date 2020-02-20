@@ -25,7 +25,7 @@ class Calendar extends Component {
     })
     this.setState( () => ({
       events: getInputValues
-    }))
+    }), () => console.log(this.state))
   }
 
   // handleSubmit = (event) => {
