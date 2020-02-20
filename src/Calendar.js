@@ -17,12 +17,15 @@ class Calendar extends Component {
   }
 
   handleChange = ({target: {name, value}}) => {
-    this.state.events.map((event, index) => {
+    const getInputValues = this.state.events.map((event, index) => {
       if (index === 0) {
         event[name] = value
       }
       return event
     })
+    this.setState( () => ({
+      events: getInputValues
+    }))
   }
 
   // handleSubmit = (event) => {
