@@ -16,16 +16,20 @@ class Calendar extends Component {
     ]
   }
 
-  handleChange = ({target: {name, value}}) => {
-    const getInputValues = this.state.events.map((event, index) => {
-      if (index === 0) {
-        event[name] = value
+  handleChange = ({target: {name, id, value}}) => {
+    const getInputValues = this.state.events.map(event  => {
+
+      /*
+      if(index === 0) {
+        const copiedEvent = {...event}
+      copiedEvent[name] = value
       }
+      */
       return event
     })
     this.setState( () => ({
       events: getInputValues
-    }), () => console.log(this.state))
+    }), () => console.log(this.state.events))
   }
 
   // handleSubmit = (event) => {
