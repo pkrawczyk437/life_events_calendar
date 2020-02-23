@@ -16,29 +16,28 @@ class Calendar extends Component {
     ]
   }
 
-  handleChange = ({target: {name, id, value}}) => {
-    const getInputValues = this.state.events.map(event  => {
-
-      /*
-      if(index === 0) {
-        const copiedEvent = {...event}
+  handleChange = ({ target: { name, value } }) => {
+    const getInputValues = this.state.events.map(event => {
+      const copiedEvent = {...event}
       copiedEvent[name] = value
-      }
-      */
-      return event
+      return copiedEvent
     })
-    this.setState( () => ({
+    this.setState((state) => ({
+      ...state,
       events: getInputValues
     }), () => console.log(this.state.events))
   }
 
-  // handleSubmit = (event) => {
-  //   event.preventDefault();
-  //   const { events } = this.state
-  //   console.log(events)
-  //   // localStorage.setItem('events', JSON.stringify(events))
-  // }
-
+  handleSubmit = event => {
+    event.preventDefault();
+    // const getLastId = this.state.events.map(event => {
+    //   const copiedEvent = {...event}
+    //   copiedEvent.id += 1
+    //   return copiedEvent
+    // })
+    // localStorage.setItem('events', JSON.stringify(events))
+    console.log(this.state.events)
+  }
 render() {
   return (
     <div className="calendar">
