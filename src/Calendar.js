@@ -1,5 +1,5 @@
 import React, { Component } from 'react'
-import './styles/App.scss';
+import './styles/Calendar.scss';
 import Event from './components/Event'
 import Form from './components/Form'
 
@@ -12,6 +12,11 @@ class Calendar extends Component {
       time: '',
       description: ''
     },
+    errors: {
+      title: '',
+      date: '',
+      time: ''
+    },
     events: []
   }
 
@@ -22,11 +27,27 @@ class Calendar extends Component {
       }))
   }
 
+  validateInputs = (fieldName, fieldValue) => {
+    const errors = {...this.state.errors, [fieldName]: fieldValue}
+    if(errors[fieldName] === "") {
+      errors[fieldName] = "Enter data"
+      // valuesCompatibility = false
+    }
+    else {
+      errors[fieldName] = "";
+      // valuesCompatibility = true
+    }
+
+    this.setState(() => ({
+      errors: errors,
+    }), () => console.log(this.state))
+  }
+
   handleChange = ({ target: { name, value } }) => {
       const data = { ...this.state.eventInfo, [name]: value}
       this.setState(() => ({
-        eventInfo: data,
-      }))
+        eventInfo: data
+      }), () => this.validateInputs(name, value))
   }
 
   handleSubmit = event => {
@@ -37,16 +58,18 @@ class Calendar extends Component {
 
     this.setState(() => ({
       eventInfo: updatedEvent,
-      events: [...this.state.events, updatedEvent]
+      events: [...this.state.events, updatedEvent],
     }), () => {
       localStorage.setItem('events', JSON.stringify(this.state.events))
     })
   }
 
 render() {
+  const { errors } = this.state;
+
   return (
     <div className="calendar">
-      <Form handleChange={this.handleChange} handleSubmit={this.handleSubmit}/>
+      <Form handleChange={this.handleChange} handleSubmit={this.handleSubmit} errors={errors}/>
       {this.state.events.length > 0 &&
         <div className="calendar-container">
           {this.state.events.map( event => (
@@ -56,6 +79,7 @@ render() {
       }
     </div>
   )
+
  }
 }
 
