@@ -31,11 +31,9 @@ class Calendar extends Component {
     const errors = {...this.state.errors, [fieldName]: fieldValue}
     if(errors[fieldName] === "") {
       errors[fieldName] = "Enter data"
-      // valuesCompatibility = false
     }
     else {
       errors[fieldName] = "";
-      // valuesCompatibility = true
     }
 
     this.setState(() => ({
@@ -68,16 +66,16 @@ render() {
   const { errors } = this.state;
 
   return (
-    <div className="calendar">
+    <>
       <Form handleChange={this.handleChange} handleSubmit={this.handleSubmit} errors={errors}/>
       {this.state.events.length > 0 &&
-        <div className="calendar-container">
+        <div className="events">
           {this.state.events.map( event => (
             <Event {...event} key={event.id}/>
           ))}
         </div>
       }
-    </div>
+    </>
   )
 
  }

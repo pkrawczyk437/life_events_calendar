@@ -13,11 +13,11 @@ const Form = ({handleChange, handleSubmit, errors}) => {
         {date.length > 0 &&
           <div className="error">{date}</div>
         }
-        <input type="time" name="time" placeholder="Add time for them..." onChange={handleChange}></input>
+        <input type="time" name="time" placeholder="Add time for them..." onChange={handleChange}/>
         {time.length > 0 &&
           <div className="error">{time}</div>
         }
-        <button type="submit">Add event</button>
+        <input type="submit" value="Add event"/>
       </form>
     </div>
   )
