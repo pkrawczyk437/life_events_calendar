@@ -11,7 +11,8 @@
 
 .root {
   min-height: $minHeight;
-  background: $bg;
+  min-width: 100%;
+  @include responsiveImage("../assets/background.png", no-repeat, top, center, fixed); 
 }
 
 .form-container {
@@ -41,16 +42,30 @@ input {
   @include flexElement(column, center, center, 25%);
   margin: 10px;
   padding: 80px;
-  background-color: rgba(255, 0, 255, .8);
-  border: 5px solid rgba(255, 255, 255, .9);
+  background-color: $eventBgColor;
+  border: 5px solid $eventBorderColor;
   border-radius: $borderRadius;
 }
 
 // MEDIA QUERIES
-
-@media (max-width: 1024px) {
+@media (max-width: 767px) {
+  .root {
+    @include responsiveImage("../assets/background_mobile.png", no-repeat, center, center, fixed);
+  }
   input {
     width: 100%;
     margin: 4px auto;
+    // padding: 2px;
+  }
+}
+
+@media (min-width: 768px) and (max-width: 1023px) {
+  .root {
+    @include responsiveImage("../assets/background_medium.png", no-repeat, top, center, fixed); 
+  }
+  input {
+    width: 100%;
+    margin: 4px auto;
+    padding: 8px;
   }
 }

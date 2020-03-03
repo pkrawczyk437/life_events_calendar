@@ -5,3 +5,7 @@
     align-items: $alignItems;
     flex-basis: $flexBasis;
 }
+
+@mixin responsiveImage($url, $bgRepeat, $position1, $position2, $attachment){
+    background: url($url) $bgRepeat $position1 $position2 $attachment;
+}
