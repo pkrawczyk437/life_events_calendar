@@ -18,33 +18,48 @@
 .form-container {
   @include flexElement(row, center, initial, 100%);
   height: 20em;
-}
-
-form {
-  padding: 1em;
-  border-radius: $borderRadius;
-}
-
-input {
-  padding: .5em 1em;
-  margin: .3em;
-  border-radius: 9px;
-  font-size: 1.2em;
+  & form {
+    border-radius: $borderRadius;
+    & input {
+      padding: .5em 1em;
+      border-radius: 9px;
+      font-size: 1.2em;
+    }
+      & .dataInput {
+        position: relative;
+        padding: 1em;
+        & input {
+          width: 100%;
+        }
+        & .error {
+          position: absolute;
+          bottom: -10%;
+          left: 50%;
+          transform: translateX(-50%);
+          font: bold 1.1em;
+          background-color: rgba(255, 255, 254, .5);
+          color: red;
+        }
+    }
+    .submitInput {
+      @include flexElement(row, center, center, 100%);
+      margin: 20px 0;
+    }
+  }
 }
 
 .events {
   @include flexElement(row, space-around, center, 100%);
   flex-wrap: wrap;
   font-size: 1.1em;
-}
-
-.event {
-  @include flexElement(column, center, center, 25%);
-  margin: 10px;
-  padding: 80px;
-  background-color: $eventBgColor;
-  border: 5px solid $eventBorderColor;
-  border-radius: $borderRadius;
+  & .event {
+    @include flexElement(column, center, center, 25%);
+    margin: 10px;
+    padding: 80px;
+    background-color: $eventBgColor;
+    border: 5px solid $eventBorderColor;
+    border-radius: $borderRadius;
+  }
 }
 
 // MEDIA QUERIES
@@ -52,20 +67,12 @@ input {
   .root {
     @include responsiveImage("../assets/background_mobile.png", no-repeat, center, center, fixed);
   }
-  input {
-    width: 100%;
-    margin: 4px auto;
-    // padding: 2px;
-  }
+  
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
   .root {
     @include responsiveImage("../assets/background_medium.png", no-repeat, top, center, fixed); 
   }
-  input {
-    width: 100%;
-    margin: 4px auto;
-    padding: 8px;
-  }
+
 }
