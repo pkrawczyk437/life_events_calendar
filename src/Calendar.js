@@ -1,4 +1,5 @@
 import React, { Component } from 'react'
+// import moment from 'moment';
 import './styles/Calendar.scss';
 import Event from './components/Event'
 import Form from './components/Form'
@@ -10,61 +11,51 @@ class Calendar extends Component {
       title: '',
       date: '',
       time: '',
-      description: ''
+      // description: ''
     },
     errors: {
-      title: '',
-      date: '',
-      time: ''
+      titleError: '',
+      dateError: '',
+      timeError: ''
     },
     events: []
   }
 
-  componentDidMount() {
-    const events = JSON.parse(localStorage.getItem("events")) || [];
-      this.setState(() => ({
-        events
-      }))
-  }
+  // componentDidMount() {
+  //   const events = JSON.parse(localStorage.getItem("events")) || [];
+  //   console.log(events)
+  //     this.setState(() => ({
+  //       events
+  //     }))
+  // }
 
-  validateInputs = (fieldName, fieldValue) => {
-    const errors = {...this.state.errors, [fieldName]: fieldValue}
-    if(errors[fieldName] === "") {
-      errors[fieldName] = "Enter data"
-    }
-    else {
-      errors[fieldName] = "";
+  validateInputs = () => {
+    const { title, date, time } = this.state.eventInfo
+    let errors = { titleError: '', dateError: '', timeError: '' };
+    
+    if(title === "") {
+      errors.titleError = 'Title is required';
     }
 
-    this.setState(() => ({
-      errors: errors,
-    }), () => console.log(this.state))
-  }
+    if(date === "") {
+      errors.dateError = 'Date is required';
+    }
+    
+    this.setState(() => ({ errors }))
+ }
 
   handleChange = ({ target: { name, value } }) => {
-      const data = { ...this.state.eventInfo, [name]: value}
-      this.setState(() => ({
-        eventInfo: data
-      }), () => this.validateInputs(name, value))
+      this.setState(() => ({ eventInfo: {...this.state.eventInfo, [name]: value} }))
   }
 
   handleSubmit = event => {
     event.preventDefault()
-    const data = {...this.state.eventInfo}
-    const { id } = data
-    const updatedEvent = {...data, id: id + 1 }
-
-    this.setState(() => ({
-      eventInfo: updatedEvent,
-      events: [...this.state.events, updatedEvent],
-    }), () => {
-      localStorage.setItem('events', JSON.stringify(this.state.events))
-    })
+    this.validateInputs();
+    console.log(this.state);
   }
 
 render() {
   const { errors } = this.state;
-
   return (
     <>
       <Form handleChange={this.handleChange} handleSubmit={this.handleSubmit} errors={errors}/>

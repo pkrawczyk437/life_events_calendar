@@ -67,12 +67,10 @@
   .root {
     @include responsiveImage("../assets/background_mobile.png", no-repeat, center, center, fixed);
   }
-  
 }
 
 @media (min-width: 768px) and (max-width: 1023px) {
   .root {
     @include responsiveImage("../assets/background_medium.png", no-repeat, top, center, fixed); 
   }
-
 }
