@@ -1,5 +1,4 @@
 import React, { Component } from 'react'
-// import moment from 'moment';
 import './styles/Calendar.scss';
 import Event from './components/Event'
 import Form from './components/Form'
@@ -18,30 +17,57 @@ class Calendar extends Component {
       dateError: '',
       timeError: ''
     },
+    isValid: false,
     events: []
   }
 
-  // componentDidMount() {
-  //   const events = JSON.parse(localStorage.getItem("events")) || [];
-  //   console.log(events)
-  //     this.setState(() => ({
-  //       events
-  //     }))
-  // }
+  addEventToLocalStorage = () => {
+    const { events } = this.state
+    localStorage.setItem('events', JSON.stringify(events));
+  }
+
+  addEvent = () => {
+    const { isValid, eventInfo, events } = this.state
+    const lastEventId = events.length > 0 ? events[events.length - 1].id + 1 : 0;
+    const event = {...eventInfo, id: lastEventId}
+    console.log(event)
+    if(isValid) {
+      this.setState(() => ({ 
+        eventInfo: event,
+        events: [...events, event]
+       }), () => {
+         this.addEventToLocalStorage();
+        })
+    }
+  }
 
   validateInputs = () => {
     const { title, date, time } = this.state.eventInfo
-    let errors = { titleError: '', dateError: '', timeError: '' };
-    
-    if(title === "") {
+    let errors = { titleError: '', dateError: '', timeError: ''};
+    let isValid = false;
+
+    if(!title) {
       errors.titleError = 'Title is required';
     }
 
-    if(date === "") {
+    if(!date) {
       errors.dateError = 'Date is required';
     }
-    
-    this.setState(() => ({ errors }))
+
+    if(!time) {
+      errors.timeError = 'Time is required';
+    }
+
+    if(title && date && time) {
+      isValid = true;
+    }
+
+    this.setState(() => ({
+      errors,
+      isValid
+    }), () => {
+      this.addEvent();
+    })
  }
 
   handleChange = ({ target: { name, value } }) => {
@@ -51,17 +77,23 @@ class Calendar extends Component {
   handleSubmit = event => {
     event.preventDefault()
     this.validateInputs();
-    console.log(this.state);
+  }
+
+  componentDidMount() {
+    const events = JSON.parse(localStorage.getItem("events")) || [];
+      this.setState(() => ({
+        events
+      }))
   }
 
 render() {
-  const { errors } = this.state;
+  const { errors, isValid, events } = this.state;
   return (
     <>
-      <Form handleChange={this.handleChange} handleSubmit={this.handleSubmit} errors={errors}/>
-      {this.state.events.length > 0 &&
+      <Form handleChange={this.handleChange} handleSubmit={this.handleSubmit} errors={errors} isValid={isValid}/>
+      {events.length > 0 &&
         <div className="events">
-          {this.state.events.map( event => (
+          {events.map( event => (
             <Event {...event} key={event.id}/>
           ))}
         </div>
