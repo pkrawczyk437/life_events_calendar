@@ -59,6 +59,9 @@
     background-color: $eventBgColor;
     border: 5px solid $eventBorderColor;
     border-radius: $borderRadius;
+    & .title {
+      text-transform: capitalize;
+    }
   }
 }
 

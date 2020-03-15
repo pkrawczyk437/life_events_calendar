@@ -1,7 +1,7 @@
 import React from 'react'
 
 const Form = ({handleChange, handleSubmit, errors, isValid}) => {
-  const { titleError, dateError, timeError} = errors
+  const { titleError, dateTimeError, descriptionError } = errors
   return (
     <div className="form-container">
       <form onSubmit={handleSubmit}>
@@ -10,12 +10,12 @@ const Form = ({handleChange, handleSubmit, errors, isValid}) => {
             {titleError !== '' && isValid === false && <div className="error">{titleError}</div>}
         </div>
         <div className="dataInput">
-          <input type="date" placeholder="Add date of it..." min="2020-01-01" max="2040-01-01" name="date" onChange={handleChange}/>
-            {dateError !== '' && isValid === false && <div className="error">{dateError}</div>}
+          <input type="datetime-local" placeholder="Add date of it..." min="2020-01-01T00:00" max="2040-01-01T00:00" name="dateTime" onChange={handleChange}/>
+            {dateTimeError !== '' && isValid === false && <div className="error">{dateTimeError}</div>}
         </div>
-        <div className="dataInput">  
-          <input type="time" name="time" placeholder="Add time for them..." onChange={handleChange}/>
-          {timeError !== '' && isValid === false && <div className="error">{timeError}</div>}
+        <div className="dataInput">
+          <input type="text" placeholder="Add some description..." name="description" onChange={handleChange}/>
+            {descriptionError !== '' && isValid === false && <div className="error">{descriptionError}</div>}
         </div>
         <div className="submitInput">
           <input type="submit" value="Add event"/>

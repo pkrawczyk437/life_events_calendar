@@ -1,13 +1,12 @@
 import React from 'react'
-import moment from 'moment';
+import Timer from './Timer';
 
-const Event = ({title, date, time, description}) => {
+const Event = ({title, description, dateTime}) => {
   return (
     <div className="event">
-      <h2>{title}</h2>
-      <p>{moment(date).format('DD-MM-YYYY')}</p>
-      <p>{time}</p>
+      <h2 className="title">{title}</h2>
       <p>{description}</p>
+      <Timer dateTime={dateTime}/>
     </div>
   )
 }

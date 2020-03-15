@@ -1,21 +1,19 @@
 import React, { Component } from 'react'
 import './styles/Calendar.scss';
-import Event from './components/Event'
-import Form from './components/Form'
+import { Event, Form } from './components';
 
 class Calendar extends Component {
   state = {
     eventInfo: {
       id: 0,
       title: '',
-      date: '',
-      time: '',
-      // description: ''
+      dateTime: '',
+      description: ''
     },
     errors: {
       titleError: '',
-      dateError: '',
-      timeError: ''
+      dateTimeError: '',
+      descriptionError: ''
     },
     isValid: false,
     events: []
@@ -30,7 +28,6 @@ class Calendar extends Component {
     const { isValid, eventInfo, events } = this.state
     const lastEventId = events.length > 0 ? events[events.length - 1].id + 1 : 0;
     const event = {...eventInfo, id: lastEventId}
-    console.log(event)
     if(isValid) {
       this.setState(() => ({ 
         eventInfo: event,
@@ -42,23 +39,23 @@ class Calendar extends Component {
   }
 
   validateInputs = () => {
-    const { title, date, time } = this.state.eventInfo
-    let errors = { titleError: '', dateError: '', timeError: ''};
+    const { title, dateTime, description } = this.state.eventInfo
+    let errors = { titleError: '', dateTimeError: '', descriptionError: ''};
     let isValid = false;
 
     if(!title) {
       errors.titleError = 'Title is required';
     }
 
-    if(!date) {
-      errors.dateError = 'Date is required';
+    if(!dateTime) {
+      errors.dateTimeError = 'Date and time are required';
     }
 
-    if(!time) {
-      errors.timeError = 'Time is required';
+    if(!description) {
+      errors.descriptionError = 'Description is required';
     }
 
-    if(title && date && time) {
+    if(title && dateTime && description) {
       isValid = true;
     }
 
@@ -71,7 +68,8 @@ class Calendar extends Component {
  }
 
   handleChange = ({ target: { name, value } }) => {
-      this.setState(() => ({ eventInfo: {...this.state.eventInfo, [name]: value} }))
+    const { eventInfo } = this.state
+      this.setState(() => ({ eventInfo: {...eventInfo, [name]: value} }))
   }
 
   handleSubmit = event => {
@@ -94,7 +92,7 @@ render() {
       {events.length > 0 &&
         <div className="events">
           {events.map( event => (
-            <Event {...event} key={event.id}/>
+              <Event {...event} key={event.id}/>
           ))}
         </div>
       }
