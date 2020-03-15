@@ -24,7 +24,6 @@ class Timer extends Component {
           const hours = duration.hours();
           const minutes = duration.minutes();
           const seconds = duration.seconds();
-          // console.log(countdown, days, hours, minutes, seconds);
           this.setState(() => ({ months, days, hours, minutes, seconds }))
         }, 1000);
     }
