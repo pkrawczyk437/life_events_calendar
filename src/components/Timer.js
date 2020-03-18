@@ -3,62 +3,89 @@ import moment from 'moment';
 
 class Timer extends Component {
     state = {
-        years: '',
         months: '',
         weeks: '',
         days: '',
         hours: '',
         minutes: '',
-        seconds: ''
+        seconds: '',
+        timeOver: false
     }
 
     componentDidMount() {
-        this.interval = setInterval(() => {
-          const { dateTime } = this.props
-          const then = moment(dateTime);
-          const now = moment();
-          const difference = then.diff(now);
-          const duration = moment.duration(difference);
-          const months = duration.months()
-          const days = duration.days();
-          const hours = duration.hours();
-          const minutes = duration.minutes();
-          const seconds = duration.seconds();
-          this.setState(() => ({ months, days, hours, minutes, seconds }))
-        }, 1000);
+      this.getEventDate();
+        this.interval = setInterval(this.getEventDate, 1000);
+    }
+
+    getEventDate = () => {
+      const { dateTime } = this.props
+      const then = moment(dateTime);
+      const now = moment();
+      const difference = then.diff(now);
+      const duration = moment.duration(difference);
+      const months = duration.months()
+      const days = duration.days();
+      const hours = duration.hours();
+      const minutes = duration.minutes();
+      const seconds = duration.seconds();
+      this.setState(() => ({ months, days, hours, minutes, seconds}), this.stopTimer)
+    }
+
+    stopTimer = () => {
+      const { months, days, hours, minutes, seconds } = this.state
+      let timeOver = false;
+      if(months <= 0 && days <= 0 && hours <= 0 && minutes <= 0 && seconds <= 0){
+        timeOver = true;
+        this.setState(() => ({ timeOver }), () => clearInterval(this.interval))
+      }
     }
 
     componentWillUnmount() {
         if(this.interval) {
-            clearInterval(this.interval);
+          clearInterval(this.interval)
         }
     }
 
     render() {
-        const { months, days, hours, minutes, seconds } = this.state
-
-        return (
+        const { months, days, hours, minutes, seconds, timeOver } = this.state
+        const { dateTime } = this.props;
+         return (
             <div className="timer">
-              <div className="timer-item">
-                {months}
-                <span>months</span>
-              </div>
-              <div className="timer-item">
-                {days}
-                <span>days</span>
-              </div>
-              <div className="timer-item">
-                {hours}
-                <span>hours</span>
-              </div>
-              <div className="timer-item">
-                {minutes}
-                <span>minutes</span>
-              </div>
-              <div className="timer-item">
-                {seconds}
-                <span>seconds</span>
-              </div>
+              {
+                timeOver ? (
+                <React.Fragment>
+                  <div className="timer-item">
+                    {moment(dateTime).from(moment())}
+                  </div>
+                </React.Fragment>
+                ) : (
+              <React.Fragment>
+                  <div className="timer-item">
+                    {months}
+                    <span>months</span>
+                  </div>
+
+                  <div className="timer-item">
+                    {days}
+                    <span>days</span>
+                  </div>
+
+                  <div className="timer-item">
+                    {hours}
+                    <span>hours</span>
+                  </div>
+
+                  <div className="timer-item">
+                    {minutes}
+                    <span>minutes</span>
+                  </div>
+
+                  <div className="timer-item">
+                    {seconds}
+                    <span>seconds</span>
+                  </div>
+                </React.Fragment>
+                )} 
             </div>
         )
     }
