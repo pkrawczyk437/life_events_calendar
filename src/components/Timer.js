@@ -13,11 +13,11 @@ class Timer extends Component {
     }
 
     componentDidMount() {
-      this.getEventDate();
-        this.interval = setInterval(this.getEventDate, 1000);
+      this.formatEventDate();
+        this.interval = setInterval(this.formatEventDate, 1000);
     }
 
-    getEventDate = () => {
+    formatEventDate = () => {
       const { dateTime } = this.props
       const then = moment(dateTime);
       const now = moment();
