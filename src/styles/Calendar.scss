@@ -28,6 +28,9 @@ $eventBorderColor: rgba(255, 255, 255, .9);
     @include flexElement(column, center, center);
     & .dataInput, .submitInput {
       padding: .5em;
+      .error {
+        color: #ffff00;
+      }
     }
     & input {
       width: 100%;
