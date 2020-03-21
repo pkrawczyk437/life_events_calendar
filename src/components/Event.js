@@ -4,8 +4,10 @@ import Timer from './Timer';
 const Event = ({title, description, dateTime}) => {
   return (
     <div className="event">
-      <h2 className="title">{title}</h2>
-      <p>{description}</p>
+      <h2 className="title">
+        Event name: {title}
+        </h2>
+      <p>Description: {description}dsdsdsdsdsdsdksodksodksokdosdksoddsdsdsdsdsdsdksodksodksokdosdksod</p>
       <Timer dateTime={dateTime}/>
     </div>
   )

@@ -54,35 +54,30 @@ class Timer extends Component {
               {
                 timeOver ? (
                 <React.Fragment>
-                  <div className="timer-item">
-                    {moment(dateTime).from(moment())}
+                  <div className={`timer-item ${timeOver ? "pastEvent": ""}`}>
+                    <span>{moment(dateTime).from(moment())}</span>
                   </div>
                 </React.Fragment>
                 ) : (
               <React.Fragment>
                   <div className="timer-item">
-                    {months}
-                    <span>months</span>
+                    {months} <span>months</span>
                   </div>
 
                   <div className="timer-item">
-                    {days}
-                    <span>days</span>
+                    {days} <span>days</span>
                   </div>
 
                   <div className="timer-item">
-                    {hours}
-                    <span>hours</span>
+                    {hours} <span>hours</span>
                   </div>
 
                   <div className="timer-item">
-                    {minutes}
-                    <span>minutes</span>
+                    {minutes} <span>minutes</span>
                   </div>
 
                   <div className="timer-item">
-                    {seconds}
-                    <span>seconds</span>
+                    {seconds} <span>seconds</span>
                   </div>
                 </React.Fragment>
                 )} 

@@ -1,6 +1,9 @@
-@import './mixins.scss', 
-        './variables.scss',
-        url('https://fonts.googleapis.com/css?family=Roboto&display=swap');
+@import './mixins.scss',
+        url('https://fonts.googleapis.com/css?family=Roboto&display=swap'),
+        url('https://fonts.googleapis.com/css?family=Orbitron:600&display=swap');
+
+$eventBgColor: rgba(255, 0, 255, .8);
+$eventBorderColor: rgba(255, 255, 255, .9);
 
 * {
   box-sizing: border-box;
@@ -10,70 +13,111 @@
 }
 
 .root {
-  min-height: $minHeight;
-  min-width: 100%;
-  @include responsiveImage("../assets/background.png", no-repeat, top, center, fixed); 
-}
-
-.form-container {
-  @include flexElement(row, center, initial, 100%);
-  height: 20em;
-  & form {
-    border-radius: $borderRadius;
-    & input {
-      padding: .5em 1em;
-      border-radius: 9px;
-      font-size: 1.2em;
-    }
-      & .dataInput {
-        position: relative;
-        padding: 1em;
-        & input {
-          width: 100%;
-        }
-        & .error {
-          position: absolute;
-          bottom: -10%;
-          left: 50%;
-          transform: translateX(-50%);
-          font: bold 1.1em;
-          background-color: rgba(255, 255, 254, .5);
-          color: red;
-        }
-    }
-    .submitInput {
-      @include flexElement(row, center, center, 100%);
-      margin: 20px 0;
-    }
-  }
-}
-
-.events {
-  @include flexElement(row, space-around, center, 100%);
-  flex-wrap: wrap;
-  font-size: 1.1em;
-  & .event {
-    @include flexElement(column, center, center, 25%);
-    margin: 10px;
-    padding: 80px;
-    background-color: $eventBgColor;
-    border: 5px solid $eventBorderColor;
-    border-radius: $borderRadius;
-    & .title {
-      text-transform: capitalize;
-    }
-  }
+  min-height: 100vh;
+  min-width: 100vw;
 }
 
 // MEDIA QUERIES
-@media (max-width: 767px) {
+@media (min-width: 320px) {
   .root {
-    @include responsiveImage("../assets/background_mobile.png", no-repeat, center, center, fixed);
+    background: url(../assets/background.png) no-repeat;
+    background-size: 100% 100%;
+  }
+
+  .form-container {
+    @include flexElement(column, center, center);
+    & .dataInput, .submitInput {
+      padding: .5em;
+    }
+    & input {
+      width: 100%;
+      border-radius: .5em;
+      padding: .3em;
+    }
+  }
+
+  .events {
+    @include flexElement(column, center, initial);
+    padding: 20px;
+    font-size: .8em;
+    color: #f5f5f5;
+    & .event {
+      background-color: $eventBgColor;
+      margin: 1em;
+      line-height: 1.6em;
+      padding: 1em;
+      text-align: center;
+      border: 1px solid $eventBorderColor;
+      border-radius: .5em;
+      word-break: break-word;
+    }
+
+    & .timer {
+      @include flexElement(row, center, center);
+      flex-wrap: wrap;
+      & .timer-item {
+        @include flexElement(column, center, center);
+        width: 20vw;
+        height: 20vw;
+        border: 2px solid #fff;
+        border-radius: 50%;
+        margin: .3em;
+        font-size: 3vw;
+        font-family: 'Orbitron', sans-serif;
+        color: black;
+        &.pastEvent {
+          font-size: 4vw;
+          border: none !important;
+        }
+        span {
+          font-family: 'Orbitron', sans-serif;
+          
+        }
+      }
+    }
   }
 }
 
-@media (min-width: 768px) and (max-width: 1023px) {
-  .root {
-    @include responsiveImage("../assets/background_medium.png", no-repeat, top, center, fixed); 
+@media (min-width: 768px) {
+  .events {
+    @include flexElement(row, center, initial);
+    flex-wrap: wrap;
+    font-size: 1em;
+    & .event {
+      @include flexElement(column, center, center);
+      flex: 0 40%;
+      & .timer-item {
+        width: 9vw;
+        height: 9vw;
+        font-size: 1.4vw;
+        &.pastEvent {
+          font-size: 2vw;
+        }
+      }
+    }
+
+  }
+}
+
+@media (min-width: 1200px) {
+    .form {
+      @include flexElement(row, center, center);
+      & .submitInput input{
+        padding: .5em;
+      }
+    }
+
+    .events {
+      & .event {
+        flex: 25%;
+        & .timer {
+        padding: .8em;
+        & .timer-item {
+          width: 7vw;
+          height: 7vw;
+          font-size: 1.2vw;
+        }
+      } 
+    }
   }
 }

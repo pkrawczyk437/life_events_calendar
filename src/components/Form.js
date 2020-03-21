@@ -4,7 +4,7 @@ const Form = ({handleChange, handleSubmit, errors, isValid}) => {
   const { titleError, dateTimeError, descriptionError } = errors
   return (
     <div className="form-container">
-      <form onSubmit={handleSubmit}>
+      <form className="form" onSubmit={handleSubmit}>
         <div className="dataInput">
           <input type="text" placeholder="Name your event..." name="title" onChange={handleChange}/>
             {titleError !== '' && isValid === false && <div className="error">{titleError}</div>}

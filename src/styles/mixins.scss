@@ -1,11 +1,6 @@
-@mixin flexElement($flexDirection, $justifyContent, $alignItems, $flexBasis) {
+@mixin flexElement($flexDirection, $justifyContent, $alignItems) {
     display: flex;
     flex-direction: $flexDirection;
     justify-content: $justifyContent;
     align-items: $alignItems;
-    flex-basis: $flexBasis;
-}
-
-@mixin responsiveImage($url, $bgRepeat, $position1, $position2, $attachment){
-    background: url($url) $bgRepeat $position1 $position2 $attachment;
 }
