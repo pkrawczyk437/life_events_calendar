@@ -1,14 +1,16 @@
 import React from 'react'
 import Timer from './Timer';
 
-const Event = ({title, description, dateTime}) => {
+const Event = ({ id, title, description, dateTime, removeEvent}) => {
+
   return (
-    <div className="event">
+    <div className="event" id={id}>
       <h2 className="title">
         Event name: {title}
         </h2>
       <p>Description: {description}</p>
       <Timer dateTime={dateTime}/>
+      <button className="deleteBtn" onClick={removeEvent}>Delete</button>
     </div>
   )
 }

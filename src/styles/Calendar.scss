@@ -26,12 +26,14 @@ $eventBorderColor: rgba(255, 255, 255, .9);
 
   .form-container {
     @include flexElement(column, center, center);
+    
     & .dataInput, .submitInput {
       padding: .5em;
       .error {
         color: #ffff00;
       }
     }
+
     & input {
       width: 100%;
       border-radius: .5em;
@@ -44,6 +46,7 @@ $eventBorderColor: rgba(255, 255, 255, .9);
     padding: 20px;
     font-size: .8em;
     color: #f5f5f5;
+    
     & .event {
       background-color: $eventBgColor;
       margin: 1em;
@@ -58,6 +61,7 @@ $eventBorderColor: rgba(255, 255, 255, .9);
     & .timer {
       @include flexElement(row, center, center);
       flex-wrap: wrap;
+
       & .timer-item {
         @include flexElement(column, center, center);
         width: 20vw;
@@ -68,15 +72,23 @@ $eventBorderColor: rgba(255, 255, 255, .9);
         font-size: 3vw;
         font-family: 'Orbitron', sans-serif;
         color: black;
+
         &.pastEvent {
           font-size: 4vw;
           border: none !important;
         }
+
         span {
           font-family: 'Orbitron', sans-serif;
-          
         }
       }
+    }
+
+    & .deleteBtn {
+      padding: .6em 1em;
+      border-radius: .5em;
+      box-shadow: 1px 2px 2px 1px #000;
+      background-color: whitesmoke;
     }
   }
 }
@@ -86,13 +98,16 @@ $eventBorderColor: rgba(255, 255, 255, .9);
     @include flexElement(row, center, initial);
     flex-wrap: wrap;
     font-size: 1em;
+
     & .event {
       @include flexElement(column, center, center);
       flex: 0 40%;
+
       & .timer-item {
         width: 9vw;
         height: 9vw;
         font-size: 1.4vw;
+
         &.pastEvent {
           font-size: 2vw;
         }
@@ -105,6 +120,7 @@ $eventBorderColor: rgba(255, 255, 255, .9);
 @media (min-width: 1200px) {
     .form {
       @include flexElement(row, center, center);
+
       & .submitInput input{
         padding: .5em;
       }
@@ -113,8 +129,10 @@ $eventBorderColor: rgba(255, 255, 255, .9);
     .events {
       & .event {
         flex: 25%;
+
         & .timer {
         padding: .8em;
+        
         & .timer-item {
           width: 7vw;
           height: 7vw;

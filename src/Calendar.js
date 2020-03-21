@@ -19,7 +19,7 @@ class Calendar extends Component {
     events: []
   }
 
-  addEventToLocalStorage = () => {
+  saveToLocalStorage = () => {
     const { events } = this.state
     localStorage.setItem('events', JSON.stringify(events));
   }
@@ -33,11 +33,11 @@ class Calendar extends Component {
         eventInfo: event,
         events: [...events, event]
        }), () => {
-         this.addEventToLocalStorage();
+         this.saveToLocalStorage();
         })
     }
   }
-
+  
   validateInputs = () => {
     const { title, dateTime, description } = this.state.eventInfo
     let errors = { titleError: '', dateTimeError: '', descriptionError: ''};
@@ -77,6 +77,17 @@ class Calendar extends Component {
     this.validateInputs();
   }
 
+  removeEvent = ({ target: { parentElement: { id } } }) => {
+    const { events } = this.state
+    const filterEvents = events.filter(event => event.id !== parseInt(id))
+
+    this.setState(() => ({
+      events: filterEvents
+    }), () => {
+      this.saveToLocalStorage();
+    });
+  }
+
   componentDidMount() {
     const events = JSON.parse(localStorage.getItem("events")) || [];
       this.setState(() => ({
@@ -92,7 +103,7 @@ render() {
       {events.length > 0 &&
         <div className="events">
           {events.map( event => (
-              <Event {...event} key={event.id}/>
+              <Event {...event} key={event.id} removeEvent={this.removeEvent}/>
           ))}
         </div>
       }
