@@ -97,6 +97,7 @@ class Calendar extends Component {
 
 render() {
   const { errors, isValid, events } = this.state;
+
   return (
     <>
       <Form handleChange={this.handleChange} handleSubmit={this.handleSubmit} errors={errors} isValid={isValid}/>
@@ -109,7 +110,7 @@ render() {
       }
     </>
   )
-
+  
  }
 }
 

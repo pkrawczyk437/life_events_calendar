@@ -2,6 +2,7 @@ import React from 'react'
 
 const Form = ({handleChange, handleSubmit, errors, isValid}) => {
   const { titleError, dateTimeError, descriptionError } = errors
+
   return (
     <div className="form-container">
       <form className="form" onSubmit={handleSubmit}>
@@ -23,6 +24,7 @@ const Form = ({handleChange, handleSubmit, errors, isValid}) => {
       </form>
     </div>
   )
+  
 }
 
 export default Form
