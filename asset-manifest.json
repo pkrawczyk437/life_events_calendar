@@ -1,0 +1,23 @@
+{
+  "files": {
+    "main.css": "/life_events_calendar/static/css/main.1254b194.chunk.css",
+    "main.js": "/life_events_calendar/static/js/main.f733aa4b.chunk.js",
+    "main.js.map": "/life_events_calendar/static/js/main.f733aa4b.chunk.js.map",
+    "runtime-main.js": "/life_events_calendar/static/js/runtime-main.e3e62d51.js",
+    "runtime-main.js.map": "/life_events_calendar/static/js/runtime-main.e3e62d51.js.map",
+    "static/js/2.00f68a6b.chunk.js": "/life_events_calendar/static/js/2.00f68a6b.chunk.js",
+    "static/js/2.00f68a6b.chunk.js.map": "/life_events_calendar/static/js/2.00f68a6b.chunk.js.map",
+    "index.html": "/life_events_calendar/index.html",
+    "precache-manifest.153fc0e512a60ceefe3f63761b82b1c4.js": "/life_events_calendar/precache-manifest.153fc0e512a60ceefe3f63761b82b1c4.js",
+    "service-worker.js": "/life_events_calendar/service-worker.js",
+    "static/css/main.1254b194.chunk.css.map": "/life_events_calendar/static/css/main.1254b194.chunk.css.map",
+    "static/js/2.00f68a6b.chunk.js.LICENSE.txt": "/life_events_calendar/static/js/2.00f68a6b.chunk.js.LICENSE.txt",
+    "static/media/Calendar.scss": "/life_events_calendar/static/media/background.80c3bc10.png"
+  },
+  "entrypoints": [
+    "static/js/runtime-main.e3e62d51.js",
+    "static/js/2.00f68a6b.chunk.js",
+    "static/css/main.1254b194.chunk.css",
+    "static/js/main.f733aa4b.chunk.js"
+  ]
+}
