@@ -7,7 +7,7 @@ const Event = ({title, description, dateTime}) => {
       <h2 className="title">
         Event name: {title}
         </h2>
-      <p>Description: {description}dsdsdsdsdsdsdksodksodksokdosdksoddsdsdsdsdsdsdksodksodksokdosdksod</p>
+      <p>Description: {description}</p>
       <Timer dateTime={dateTime}/>
     </div>
   )
