@@ -1,6 +1,6 @@
 import React, { Component } from 'react'
-import './styles/Calendar.scss';
-import { Event, Form } from './components';
+import './styles/Calendar.scss'
+import { Event, Form } from './components'
 
 class Calendar extends Component {
   state = {
@@ -8,110 +8,127 @@ class Calendar extends Component {
       id: 0,
       title: '',
       dateTime: '',
-      description: ''
+      description: '',
     },
     errors: {
       titleError: '',
       dateTimeError: '',
-      descriptionError: ''
+      descriptionError: '',
     },
     isValid: false,
-    events: []
+    events: [],
   }
 
   saveToLocalStorage = () => {
     const { events } = this.state
-    localStorage.setItem('events', JSON.stringify(events));
+    localStorage.setItem('events', JSON.stringify(events))
   }
 
   addEvent = () => {
     const { isValid, eventInfo, events } = this.state
-    const lastEventId = events.length > 0 ? events[events.length - 1].id + 1 : 0;
-    const event = {...eventInfo, id: lastEventId}
-    if(isValid) {
-      this.setState(() => ({ 
-        eventInfo: event,
-        events: [...events, event]
-       }), () => {
-         this.saveToLocalStorage();
-        })
+    const lastEventId = events.length > 0 ? events[events.length - 1].id + 1 : 0
+    const event = { ...eventInfo, id: lastEventId }
+    if (isValid) {
+      this.setState(
+        () => ({
+          eventInfo: event,
+          events: [...events, event],
+        }),
+        () => {
+          this.saveToLocalStorage()
+        },
+      )
     }
   }
-  
+
   validateInputs = () => {
     const { title, dateTime, description } = this.state.eventInfo
-    let errors = { titleError: '', dateTimeError: '', descriptionError: ''};
-    let isValid = false;
+    let errors = { titleError: '', dateTimeError: '', descriptionError: '' }
+    let isValid = false
 
-    if(!title) {
-      errors.titleError = 'Title is required';
+    if (!title) {
+      errors.titleError = 'Title is required'
     }
 
-    if(!dateTime) {
-      errors.dateTimeError = 'Date and time are required';
+    if (!dateTime) {
+      errors.dateTimeError = 'Date and time are required'
     }
 
-    if(!description) {
-      errors.descriptionError = 'Description is required';
+    if (!description) {
+      errors.descriptionError = 'Description is required'
     }
 
-    if(title && dateTime && description) {
-      isValid = true;
+    if (title && dateTime && description) {
+      isValid = true
     }
 
-    this.setState(() => ({
-      errors,
-      isValid
-    }), () => {
-      this.addEvent();
-    })
- }
+    this.setState(
+      () => ({
+        errors,
+        isValid,
+      }),
+      () => {
+        this.addEvent()
+      },
+    )
+  }
 
   handleChange = ({ target: { name, value } }) => {
     const { eventInfo } = this.state
-      this.setState(() => ({ eventInfo: {...eventInfo, [name]: value} }))
+    this.setState(() => ({ eventInfo: { ...eventInfo, [name]: value } }))
   }
 
   handleSubmit = event => {
     event.preventDefault()
-    this.validateInputs();
+    this.validateInputs()
   }
 
-  removeEvent = ({ target: { parentElement: { id } } }) => {
+  removeEvent = ({
+    target: {
+      parentElement: { id },
+    },
+  }) => {
     const { events } = this.state
     const filterEvents = events.filter(event => event.id !== parseInt(id))
 
-    this.setState(() => ({
-      events: filterEvents
-    }), () => {
-      this.saveToLocalStorage();
-    });
+    this.setState(
+      () => ({
+        events: filterEvents,
+      }),
+      () => {
+        this.saveToLocalStorage()
+      },
+    )
   }
 
   componentDidMount() {
-    const events = JSON.parse(localStorage.getItem("events")) || [];
-      this.setState(() => ({
-        events
-      }))
+    const events = JSON.parse(localStorage.getItem('events')) || []
+    this.setState(() => ({
+      events,
+    }))
   }
 
-render() {
-  const { errors, isValid, events } = this.state;
+  render() {
+    const { errors, isValid, events } = this.state
 
-  return (
-    <>
-      <Form handleChange={this.handleChange} handleSubmit={this.handleSubmit} errors={errors} isValid={isValid}/>
-      {events.length > 0 &&
-        <div className="events">
-          {events.map( event => (
-              <Event {...event} key={event.id} removeEvent={this.removeEvent}/>
-          ))}
-        </div>
-      }
-    </>
-  )
-  
- }
+    return (
+      <>
+        <Form
+          errors={errors}
+          handleChange={this.handleChange}
+          handleSubmit={this.handleSubmit}
+          isValid={isValid}
+        />
+        {events.length > 0 && (
+          <div className="events">
+            {events.map(event => (
+              <Event {...event} key={event.id} removeEvent={this.removeEvent} />
+            ))}
+          </div>
+        )}
+      </>
+    )
+  }
 }
 
 export default Calendar
