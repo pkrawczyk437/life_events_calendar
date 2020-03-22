@@ -31,6 +31,7 @@ $eventBorderColor: rgba(255, 255, 255, .9);
       padding: .5em;
       .error {
         color: #ffff00;
+        margin-top: .5em;
       }
     }
 
@@ -43,7 +44,7 @@ $eventBorderColor: rgba(255, 255, 255, .9);
 
   .events {
     @include flexElement(column, center, initial);
-    padding: 20px;
+    padding: 1.2em;
     font-size: .8em;
     color: #f5f5f5;
 
@@ -61,7 +62,7 @@ $eventBorderColor: rgba(255, 255, 255, .9);
     & .timer {
       @include flexElement(row, center, center);
       flex-wrap: wrap;
-
+      padding: .5em;
       & .timer-item {
         @include flexElement(column, center, center);
         width: 20vw;
@@ -119,7 +120,7 @@ $eventBorderColor: rgba(255, 255, 255, .9);
 
 @media (min-width: 1200px) {
   .form {
-    @include flexElement(row, center, center);
+    @include flexElement(row, center, flex-start);
 
     & .submitInput input{
       padding: .5em;
@@ -132,10 +133,9 @@ $eventBorderColor: rgba(255, 255, 255, .9);
 
       & .timer {
         padding: .8em;
-
         & .timer-item {
-          width: 7vw;
-          height: 7vw;
+          width: 8vw;
+          height: 8vw;
           font-size: 1.2vw;
         }
       }

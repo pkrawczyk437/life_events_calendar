@@ -3,6 +3,7 @@ import moment from 'moment'
 
 class Timer extends Component {
   state = {
+    years: '',
     months: '',
     weeks: '',
     days: '',
@@ -23,12 +24,13 @@ class Timer extends Component {
     const now = moment()
     const difference = then.diff(now)
     const duration = moment.duration(difference)
+    const years = duration.years();
     const months = duration.months()
     const days = duration.days()
     const hours = duration.hours()
     const minutes = duration.minutes()
     const seconds = duration.seconds()
-    this.setState(() => ({ months, days, hours, minutes, seconds }), this.stopTimer)
+    this.setState(() => ({ years, months, days, hours, minutes, seconds }), this.stopTimer)
   }
 
   stopTimer = () => {
@@ -50,7 +52,7 @@ class Timer extends Component {
   }
 
   render() {
-    const { months, days, hours, minutes, seconds, timeOver } = this.state
+    const { years, months, days, hours, minutes, seconds, timeOver } = this.state
     const { dateTime } = this.props
     return (
       <div className="timer">
@@ -62,6 +64,10 @@ class Timer extends Component {
           </React.Fragment>
         ) : (
           <React.Fragment>
+            <div className="timer-item">
+              {years} <span>years</span>
+            </div>
+
             <div className="timer-item">
               {months} <span>months</span>
             </div>
